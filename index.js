@@ -44,6 +44,7 @@ async function getData(files) {
       const promises = files.map(file => fetchJsonFile(file));
       const results = await Promise.all(promises);
       console.log('All JSON files fetched:', results);
+      return {data: results[0], data1: results[1]}
   } catch (error) {
       console.error('Error fetching JSON files:', error);
   }
