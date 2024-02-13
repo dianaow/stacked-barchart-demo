@@ -6,9 +6,11 @@ async function init() {
 
     const { data, data1 } = await getData(jsonFiles)
 
+    const combined = [data, data1]
+
     // Execute the function to generate a new network
     const graph = StackedBarChart(
-      { data, data1 },
+      { data: combined },
       {
         containerSelector: "#app"
       }
