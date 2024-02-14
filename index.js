@@ -6,11 +6,9 @@ async function init() {
 
     const { data, data1 } = await getData(jsonFiles)
 
-    const combined = [data, data1]
-
     // Execute the function to generate a new network
     const graph = StackedBarChart(
-      { data: combined },
+      { data },
       {
         containerSelector: "#app"
       }
@@ -19,7 +17,11 @@ async function init() {
     // To expand the graph upon node click (ie. to see more connections another hop away)
     // The clicked data object can also be used to extract new information
     graph.on('nodeClick', (event) => {
-      console.log('Node clicked Data:', event.clickedNodeData);
+      const node = event.clickedNodeData
+      const newNode = data1[node.row][node.key]
+      newNode.key = node.key
+      newNode.row = node.row
+      graph.update(newNode)
     })
 
   } catch (error) {
